@@ -5,7 +5,7 @@ from tkinter import filedialog, messagebox, ttk
 
 TRANSLATIONS = {
     "en": {
-        "title": "Sorter",
+        "title": "File Sorter",
         "instruction": "Please select the folder where files need to be sorted,\nor enter the path manually.",
         "browse": "Browse",
         "start": "Start sorting",
@@ -22,7 +22,7 @@ TRANSLATIONS = {
         "end": "Sorting finished",
     },
     "ru": {
-        "title": "Sorter",
+        "title": "Сортировщик файлов",
         "instruction": "Пожалуйста, выберите папку, в которой необходимо\nотсортировать файлы, либо введите путь вручную.",
         "browse": "Обзор",
         "start": "Начать сортировку",
