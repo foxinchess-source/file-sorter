@@ -24,6 +24,7 @@ exe = EXE(
     [],
     name='sorter',
     debug=False,
+    icon='assets/ico/6179708.ico',
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
