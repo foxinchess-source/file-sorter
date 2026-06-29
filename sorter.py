@@ -5,14 +5,8 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
 def sort_img(sf):
-    jpeg_folder = os.path.join(sf, 'Jpeg')
-    png_folder = os.path.join(sf, 'Png')
-
-    os.makedirs(jpeg_folder, exist_ok=True)
-    os.makedirs(png_folder, exist_ok=True)
-
-    jpeg_count = 0
-    png_count = 0
+    extension_counts = {}
+    moved_count = 0
 
     for filename in os.listdir(sf):
         file_path = os.path.join(sf, filename)
@@ -20,20 +14,29 @@ def sort_img(sf):
         if not os.path.isfile(file_path):
             continue
 
-        if filename.lower().endswith(('.jpeg', '.jpg')):
-            shutil.move(file_path, os.path.join(jpeg_folder, filename))
-            jpeg_count += 1
-            print(f'Перемещён JPEG: {filename}')
+        extension = os.path.splitext(filename)[1].lower().lstrip('.')
+        folder_name = extension if extension else 'no_extension'
+        target_folder = os.path.join(sf, folder_name)
 
-        elif filename.lower().endswith('.png'):
-            shutil.move(file_path, os.path.join(png_folder, filename))
-            png_count += 1
-            print(f'Перемещён PNG: {filename}')
+        os.makedirs(target_folder, exist_ok=True)
+
+        destination_path = os.path.join(target_folder, filename)
+        if os.path.exists(destination_path):
+            base_name, file_extension = os.path.splitext(filename)
+            counter = 1
+            while os.path.exists(os.path.join(target_folder, f'{base_name} ({counter}){file_extension}')):
+                counter += 1
+            destination_path = os.path.join(target_folder, f'{base_name} ({counter}){file_extension}')
+
+        shutil.move(file_path, destination_path)
+        moved_count += 1
+        extension_counts[folder_name] = extension_counts.get(folder_name, 0) + 1
+        print(f'Перемещён файл: {filename} -> {folder_name}')
 
     print('\n Результаты сортировки:')
-    print(f'\n Отсортированно JPEG: {jpeg_count}')
-    print(f'\n Отсортированно PNG: {png_count}')
-    print(f'\n Общее количество: {png_count + jpeg_count}')
+    for folder_name, count in sorted(extension_counts.items()):
+        print(f'\n Отсортированно {folder_name}: {count}')
+    print(f'\n Общее количество: {moved_count}')
     print('Конец сортировки')
 
     messagebox.showinfo("Выполнено", "Сортировка завершена!")
