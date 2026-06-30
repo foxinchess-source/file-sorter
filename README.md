@@ -12,7 +12,8 @@ A simple file sorting utility with a graphical interface.
 
 ## Features
 
-- Sort files by extension
+- Sorting files by creation date
+- Sorting files by extension
 - One-click sorting
 
 ---
@@ -26,6 +27,7 @@ A simple file sorting utility with a graphical interface.
 
 ## How to use
 
+- Select the sorting method in the "Settings"
 - Select the folder in which you want to sort by clicking the "Browse" button
 - Click "Start sorting"
 
