@@ -4,6 +4,12 @@ A simple file sorting utility with a graphical interface.
 
 ---
 
+## Platform
+
+- Windows 10/11
+
+- ---
+
 ## Features
 
 - Sort files by extension
